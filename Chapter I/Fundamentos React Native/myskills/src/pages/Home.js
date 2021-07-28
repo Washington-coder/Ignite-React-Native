@@ -22,21 +22,62 @@ import {
 //  -> Usado em estilizacoes
 
 export function Home() {
+
+  // Utilizando estados
+  const [newSkill, setNewSkill] = useState("");
+  const [mySkills, setMySkills] = useState([]);
+  // Utilizando estados
+
+  //Funções sempre antes do return
+
+  function handleAddNewSkill() {
+    setMySkills([...mySkills, newSkill]);
+  }
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome, Rodrigo</Text>
+
+      <Text style={styles.title}>
+        Welcome, Rodrigo
+      </Text>
 
       <TextInput
         style={styles.input}
         placeholder="New Skill"
         placeholderTextColor="#555"
+        onChangeText={setNewSkill}
       />
 
-      <TouchableOpacity style={styles.button} activeOpacity={0.7}>
-        <Text style={styles.buttonText}>Add</Text>
+      <TouchableOpacity
+        style={styles.button}
+        activeOpacity={0.7}
+        onPress={handleAddNewSkill}
+      >
+        <Text style={styles.buttonText}>
+          Add
+        </Text>
       </TouchableOpacity>
 
-      <Text style={[styles.title, { marginTop: 50 }]}>My Skills</Text>
+      <Text style={[styles.title, { marginVertical: 50 }]}>
+        My Skills
+      </Text>
+
+      {
+        mySkills.map(skill => (
+
+          <TouchableOpacity
+            key={skill}
+            style={styles.buttonSkill}
+          >
+            <Text style={styles.textSkill}>
+              {skill}
+            </Text>
+          </TouchableOpacity>
+        ))
+
+      }
+
+
     </View>
   );
 }
@@ -46,7 +87,6 @@ export function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 20,
     paddingVertical: 70,
     paddingHorizontal: 30,
     backgroundColor: "#121015",
@@ -75,5 +115,17 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "#fff",
+  },
+  buttonSkill: {
+    backgroundColor: "#1F1e25",
+    padding: 15,
+    borderRadius: 20,
+    alignItems: "center",
+    marginVertical: 10
+  },
+  textSkill: {
+    color: "#FFF",
+    fontSize: 22,
+    fontWeight: "bold",
   },
 });

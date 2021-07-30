@@ -11,6 +11,10 @@ import {
 import { Button } from "../components/Button";
 import { SkillCard } from "../components/SkillCard";
 
+interface SkillData {
+  id: string;
+  name: string;
+}
 
 // NOTES
 
@@ -26,17 +30,20 @@ import { SkillCard } from "../components/SkillCard";
 //  -> Usado em estilizacoes
 
 export function Home() {
-
   // Utilizando estados
   const [newSkill, setNewSkill] = useState("");
-  const [mySkills, setMySkills] = useState([]);
+  const [mySkills, setMySkills] = useState<SkillData[]>([]);
   const [greeting, setGreeting] = useState("");
   // Utilizando estados
 
-
   //Funções sempre antes do return
   function handleAddNewSkill() {
-    setMySkills([...mySkills, newSkill]);
+    const data = {
+      id: String(new Date().getTime()),
+      name: newSkill,
+    };
+
+    setMySkills([...mySkills, data]);
   }
   //Funções sempre antes do return
 
@@ -46,25 +53,18 @@ export function Home() {
 
     if (currentHour < 12) {
       setGreeting("Good mornig");
-    }
-    else if (currentHour >= 12 && currentHour <= 18) {
+    } else if (currentHour >= 12 && currentHour <= 18) {
       setGreeting("Good afternoon");
     } else {
       setGreeting("Good evevinig");
     }
-
-  }, [mySkills])
+  }, [mySkills]);
 
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>Welcome, Rodrigo</Text>
 
-      <Text style={styles.title}>
-        Welcome, Rodrigo
-      </Text>
-
-      <Text style={styles.greetings}>
-        {greeting}
-      </Text>
+      <Text style={styles.greetings}>{greeting}</Text>
 
       <TextInput
         style={styles.input}
@@ -75,18 +75,13 @@ export function Home() {
 
       <Button onPress={handleAddNewSkill} />
 
-      <Text style={[styles.title, { marginVertical: 50 }]}>
-        My Skills
-      </Text>
+      <Text style={[styles.title, { marginVertical: 50 }]}>My Skills</Text>
 
       <FlatList
         data={mySkills}
-        keyExtractor={item => item}
-        renderItem={({ item }) => (
-          <SkillCard skill={item} />
-        )}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <SkillCard skill={item.name} />}
       />
-
     </View>
   );
 }
@@ -116,7 +111,6 @@ const styles = StyleSheet.create({
     borderRadius: 7,
   },
   greetings: {
-    color: "#fff"
-  }
-
+    color: "#fff",
+  },
 });

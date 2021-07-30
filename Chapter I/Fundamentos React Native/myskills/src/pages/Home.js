@@ -5,7 +5,11 @@ import {
   StyleSheet,
   TextInput,
   Platform,
+  ScrollView,
+  FlatList,
+
 } from "react-native";
+
 import { Button } from "../components/Button";
 import { SkillCard } from "../components/SkillCard";
 
@@ -30,11 +34,12 @@ export function Home() {
   const [mySkills, setMySkills] = useState([]);
   // Utilizando estados
 
-  //Funções sempre antes do return
 
+  //Funções sempre antes do return
   function handleAddNewSkill() {
     setMySkills([...mySkills, newSkill]);
   }
+  //Funções sempre antes do return
 
   return (
     <View style={styles.container}>
@@ -43,6 +48,8 @@ export function Home() {
         Welcome, Rodrigo
       </Text>
 
+
+
       <TextInput
         style={styles.input}
         placeholder="New Skill"
@@ -50,21 +57,19 @@ export function Home() {
         onChangeText={setNewSkill}
       />
 
-      <Button />
+      <Button onPress={handleAddNewSkill} />
 
       <Text style={[styles.title, { marginVertical: 50 }]}>
         My Skills
       </Text>
 
-      {
-        mySkills.map(skill => (
-
-          <SkillCard />
-
-        ))
-
-      }
-
+      <FlatList
+        data={mySkills}
+        keyExtractor={item => item}
+        renderItem={({ item }) => (
+          <SkillCard skill={item} />
+        )}
+      />
 
     </View>
   );
@@ -75,7 +80,7 @@ export function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: 70,
+    paddingVertical: 30,
     paddingHorizontal: 30,
     backgroundColor: "#121015",
   },

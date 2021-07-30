@@ -5,14 +5,14 @@ import {
     Text
 } from "react-native"
 
-export function SkillCard() {
+export function SkillCard({ skill }) {
     return (
         <TouchableOpacity
-            key="1"
+            key={skill}
             style={styles.buttonSkill}
         >
             <Text style={styles.textSkill}>
-                skill
+                {skill}
             </Text>
         </TouchableOpacity>
     );

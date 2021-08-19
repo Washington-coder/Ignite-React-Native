@@ -52,6 +52,7 @@ export function Home() {
     ));
   }
   //Funções sempre antes do return
+  //Funções sempre antes do return
 
   useEffect(() => {
     const currentHour = new Date().getHours();

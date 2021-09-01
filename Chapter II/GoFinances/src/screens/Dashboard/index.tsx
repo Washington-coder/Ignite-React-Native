@@ -8,10 +8,8 @@ import { Container, Title } from './styles';
 export function Dashboard() {
     return (
         <Container>
-            <Title>Data a</Title>
+            <Title>Dashboard</Title>
         </Container>
     );
-
-
 }
 

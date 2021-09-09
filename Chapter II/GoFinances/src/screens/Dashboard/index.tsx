@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-    Text,
-} from "react-native"
+import { HighlightCard } from '../../components/HighlightCard';
 
 import {
     Container,
@@ -10,10 +8,11 @@ import {
     UserInfo,
     Photo,
     User,
-    UserGreering,
+    UserGreeting,
     UserName,
-
+    Icon,
 } from './styles';
+
 
 export function Dashboard() {
     return (
@@ -25,12 +24,14 @@ export function Dashboard() {
                             source={{ uri: "https://avatars.githubusercontent.com/u/82000177?v=4" }}
                         />
                         <User>
-                            <UserGreering>Olá,</UserGreering>
+                            <UserGreeting>Olá,</UserGreeting>
                             <UserName>Washington</UserName>
                         </User>
                     </UserInfo>
+                    <Icon name="power" />
                 </UserWrapper>
             </Header>
+            <HighlightCard />
         </Container>
     );
 }

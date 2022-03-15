@@ -51,6 +51,10 @@ export function Register() {
         console.log(data);
     }
 
+    function handleInputChance(text: string) {
+        console.log(text);
+    }
+
     return (
         <Container>
             <Header>
